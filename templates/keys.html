@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .key-container {
+            margin: 20px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            background-color: #f9f9f9;
+        }
+        .key-header {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .key-content {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+            word-break: break-all;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .key-info {
+            font-size: 12px;
+            color: #666;
+        }
+        .status-exists {
+            color: #28a745;
+        }
+        .status-missing {
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ title }}</h1>
+    
+    {% if keys_info.error %}
+        <div class="result-box">
+            <p style="color: red;">{{ keys_info.error }}</p>
+        </div>
+    {% else %}
+        {% for key_name, key_data in keys_info.items() %}
+            <div class="key-container">
+                <div class="key-header">
+                    <span>{{ key_name }}</span>
+                    <span class="key-info {% if key_data.exists %}status-exists{% else %}status-missing{% endif %}">
+                        {% if key_data.exists %}
+                            ✅ {{ key_data.size }} bytes
+                        {% else %}
+                            ❌ Missing
+                        {% endif %}
+                    </span>
+                </div>
+                <div class="key-content">{{ key_data.content }}</div>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <a href="{{ url_for('index') }}" class="back-btn">⬅ Back to Home</a>
+</body>
+</html>

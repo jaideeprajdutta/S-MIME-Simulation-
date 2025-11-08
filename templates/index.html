@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>S/MIME Email Security Simulation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>📧 S/MIME Email Encryption & Decryption</h1>
+    <p class="subtitle">Hybrid Encryption (AES + RSA) with Digital Signature</p>
+
+    <div class="button-container">
+        <a href="{{ url_for('generate_keys') }}" class="btn">1️⃣ Generate RSA Keys</a>
+        <a href="{{ url_for('view_keys') }}" class="btn">🔑 View Keys</a>
+        <a href="{{ url_for('encrypt') }}" class="btn">2️⃣ Encrypt & Sign Email</a>
+        <a href="{{ url_for('decrypt') }}" class="btn">3️⃣ Decrypt Email</a>
+        <a href="{{ url_for('verify') }}" class="btn">4️⃣ Verify Signature</a>
+    </div>
+</body>
+</html>
